@@ -21,7 +21,7 @@ include_recipe "database"
 
 postgresql_database 'development' do
   connection(
-    :host      => 'localhost'
+    :host      => 'localhost',
     :port      => node['postgresql']['config']['port'],
     :username  => 'postgres',
     :password  => node['postgresql']['password']['postgres']
@@ -31,7 +31,7 @@ end
 
 postgresql_database 'test' do
   connection(
-    :host      => 'localhost'
+    :host      => 'localhost',
     :port      => node['postgresql']['config']['port'],
     :username  => 'postgres',
     :password  => node['postgresql']['password']['postgres']
