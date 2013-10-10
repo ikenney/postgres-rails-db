@@ -18,6 +18,7 @@
 #
 
 include_recipe "database"
+include_recipe "postgresql::ruby"
 
 postgresql_database 'development' do
   connection(
