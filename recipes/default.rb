@@ -24,8 +24,8 @@ postgresql_database 'development' do
   connection(
     :host      => 'localhost',
     :port      => node['postgresql']['config']['port'],
-    :username  => 'postgres',
-    :password  => node['postgresql']['password']['postgres']
+    :username  => 'postgres'
+#    :password  => node['postgresql']['password']['postgres']
   )
   action :create
 end
@@ -35,7 +35,6 @@ postgresql_database 'test' do
     :host      => 'localhost',
     :port      => node['postgresql']['config']['port'],
     :username  => 'postgres',
-    :password  => node['postgresql']['password']['postgres']
   )
   action :create
 end
