@@ -25,6 +25,4 @@ default['postgresql']['pg-hba'] = [
   { :type => 'local', :db => 'all', :user => 'postgres', :addr => '', :method => 'trust' },
   { :type => 'host', :db => 'all', :user => 'postgres', :addr => '127.0.0.1/32', :method => 'trust' }
 ]
-default['build-essential'] = { compiletime: true }
-
-
+default['build-essential'] = { :compiletime => true }
