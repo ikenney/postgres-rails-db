@@ -34,7 +34,7 @@ postgresql_database 'test' do
   connection(
     :host      => 'localhost',
     :port      => node['postgresql']['config']['port'],
-    :username  => 'postgres',
+    :username  => 'postgres'
   )
   action :create
 end
