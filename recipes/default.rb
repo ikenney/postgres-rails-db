@@ -18,16 +18,17 @@
 #
 
 include_recipe "database"
-include_recipe "postgresql"
+include_recipe "postgresql::server"
 include_recipe "postgresql::ruby"
 
 node['postgres-rails-db'][:databases].each do |database|
-postgresql_database database do
-  connection(
-    :host      => 'localhost',
-    :port      => node['postgresql']['config']['port'],
-    :username  => 'postgres'
-#    :password  => node['postgresql']['password']['postgres']
-  )
-  action :create
+  postgresql_database database do
+    connection(
+      :host      => 'localhost',
+      :port      => node['postgresql']['config']['port'],
+      :username  => 'postgres'
+      :password  => node['postgres-rails-db']['password']
+    )
+    action :create
+  end
 end
