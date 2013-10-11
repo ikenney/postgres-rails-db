@@ -22,7 +22,7 @@ default['postgres-rails-db'][:databases] = %w(development test)
 default['postgres-rails-db'][:password] = SecureRandom.hex(32)
 default['postgressql'][:password] = "md5#{Digest::MD5.hexdigest(node['postgres-rails-db'][:password])}"
 default['postgresql']['pg-hba'] = [
-  { :type => 'local', :db => 'all', :user => 'postgres', :addr => '', :method => 'trust' }
+  { :type => 'local', :db => 'all', :user => 'postgres', :addr => '', :method => 'trust' },
   { :type => 'host', :db => 'all', :user => 'postgres', :addr => '127.0.0.1/32', :method => 'trust' }
 ]
 default['build-essential'] = { compiletime: true }
