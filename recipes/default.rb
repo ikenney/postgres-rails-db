@@ -21,6 +21,8 @@ include_recipe "database"
 include_recipe "postgresql::server"
 include_recipe "postgresql::ruby"
 
+log "password:#{node['postgres-rails-db']['password']}"
+
 node['postgres-rails-db'][:databases].each do |database|
   postgresql_database database do
     connection(
