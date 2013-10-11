@@ -1,6 +1,6 @@
-#
+
 # Cookbook Name:: postgres-rails-db
-# Recipe:: default
+# Attributes:: default
 #
 # Copyright 2013, Ian Kenney
 #
@@ -16,18 +16,15 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 #
+require 'securerandom'
+require 'digest/md5'
+default['postgres-rails-db'][:databases] = %w(development test)
+default['postgres-rails-db'][:password] = SecureRandom.hex(32)
+default['postgressql'][:password] = "md5#{Digest::MD5.hexdigest(node['postgres-rails-db'][:password])}"
+default['postgresql']['pg-hba'] = [ 
+  { type: 'local', db: 'all', user: 'postgres', addr: '', method: 'trust' }
+  { type: 'host', db: 'all', user: 'postgres', addr: '127.0.0.1/32', method: 'trust' }
+]
+default['build-essential'] = { compiletime: true }
 
-include_recipe "database"
-include_recipe "postgresql"
-include_recipe "postgresql::ruby"
 
-node['postgres-rails-db'][:databases].each do |database|
-postgresql_database database do
-  connection(
-    :host      => 'localhost',
-    :port      => node['postgresql']['config']['port'],
-    :username  => 'postgres'
-#    :password  => node['postgresql']['password']['postgres']
-  )
-  action :create
-end
