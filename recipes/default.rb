@@ -28,7 +28,7 @@ node['postgres-rails-db'][:databases].each do |database|
     connection(
       :host      => 'localhost',
       :port      => node['postgresql']['config']['port'],
-      :username  => 'postgres'
+      :username  => 'postgres',
       :password  => node['postgres-rails-db']['password']
     )
     action :create
